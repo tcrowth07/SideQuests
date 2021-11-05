@@ -3,10 +3,12 @@ import Card from "./Card.js";
 import { useEffect, useState } from "react";
 
 function App() {
+  const MINUTE_MS = 60000;
   useEffect(() => {
     async function GetSideQuests() {
+      console.log("fetch");
       await fetch(
-        "https://api.trello.com/1/lists/5f2470f05a21633c4e877910/cards?key=dbb02a08af7d81a4ae178d911ecaac86&token=dba072c82d36c491f720a8620d735c4f46b6c29c5ea8398478aa564d116426c4",
+        `https://api.trello.com/1/lists/5f2470f05a21633c4e877910/cards?key=${process.env.API_KEY}&token=${process.env.API_TOKEN}`,
         {
           method: "GET",
         }
@@ -26,6 +28,8 @@ function App() {
         .catch((err) => console.error(err));
     }
     GetSideQuests();
+    //const interval = setInterval(GetSideQuests, MINUTE_MS);
+    //return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
   }, []);
 
   const [sideQuests, setSideQuests] = useState([]);
