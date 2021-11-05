@@ -1,14 +1,15 @@
 import "./App.css";
 import Card from "./Card.js";
 import { useEffect, useState } from "react";
+import dotenv from 'dotenv';
+dotenv.config();
 
 function App() {
   const MINUTE_MS = 60000;
   useEffect(() => {
     async function GetSideQuests() {
-      console.log("fetch");
       await fetch(
-        `https://api.trello.com/1/lists/5f2470f05a21633c4e877910/cards?key=${process.env.API_KEY}&token=${process.env.API_TOKEN}`,
+        `https://api.trello.com/1/lists/5f2470f05a21633c4e877910/cards?key=${process.env.REACT_APP_API_KEY}&token=${process.env.REACT_APP_API_TOKEN}`,
         {
           method: "GET",
         }
