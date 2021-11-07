@@ -1,9 +1,16 @@
+import { useEffect, useState } from "react";
+
 function Card(props) {
+  const colorGold = "#c7a55a"
+  const colorGreen = "#a3b849";
+  const colorBlue = "#05ace1";
+  const colorRed = "#cc070b";
+  const colorText = "#fdfee8";
+
   function GetFormattedDate(date) {
     let mm = date.substring(5, 7);
     let dayString = date.substring(8, 10);
-    let dd = parseInt(dayString) - 1
-    console.log(dd)
+    let dd = parseInt(dayString) - 1;
     return mm + " / " + dd;
   }
 
@@ -16,15 +23,13 @@ function Card(props) {
   }
 
   function GetDateColor(daysUntilDue) {
-    if (daysUntilDue <= 1) return "#F21B3F";
-    if (daysUntilDue > 1 && daysUntilDue <= 3) return "#FF9914";
-    if (daysUntilDue > 3) return "#ABFF4F";
+    if (daysUntilDue <= 1) return colorRed;
+    else return colorGold;
   }
 
   function GetDaysLeftString(daysUntilDue) {
     if (daysUntilDue <= -2) return Math.abs(daysUntilDue) + " days past due";
     if (daysUntilDue === -1) {
-      console.log("minus one");
       return Math.abs(daysUntilDue) + " day past due";
     }
     if (daysUntilDue === 0) return "Due today";
@@ -35,15 +40,24 @@ function Card(props) {
   return (
     <div
       className="Card-body"
-      style={{ backgroundColor: GetDateColor(DaysUntilDue(props.date)) }}
+      style={{ borderColor: GetDateColor(DaysUntilDue(props.date)) }}
     >
-      <h3 className="child" style={{ width: "60%" }}>
-        {props.title}
-      </h3>
+      <div style={{ width: "85%" }}>
+        <h4 className="child" style={{ marginTop: "7px" }}>
+          {props.title}
+        </h4>
+        <p className="child" style={{ fontSize: "calc(6px + 1vmin)", marginTop: "3px" }}>
+          {props.description}
+        </p>
+      </div>
       <div className="Date-container">
-          {console.log(props.date)}
         <h5 className="date">{GetFormattedDate(props.date)}</h5>
-        <h5 className="date">{GetDaysLeftString(DaysUntilDue(props.date))}</h5>
+        <h5
+          className="date"
+          style={{ color: DaysUntilDue(props.date) <=3 ? colorRed : colorGold }}
+        >
+          {GetDaysLeftString(DaysUntilDue(props.date))}
+        </h5>
       </div>
     </div>
   );
