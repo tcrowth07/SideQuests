@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-
 function Card(props) {
   const colorGold = "#c7a55a"
-  const colorGreen = "#a3b849";
-  const colorBlue = "#05ace1";
   const colorRed = "#cc070b";
-  const colorText = "#fdfee8";
+  // const colorGreen = "#a3b849";
+  // const colorBlue = "#05ace1";
 
   function GetFormattedDate(date) {
     let mm = date.substring(5, 7);

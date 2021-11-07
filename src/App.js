@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 function App() {
-  const MINUTE_MS = 60000;
+  // const MINUTE_MS = 60000;
   useEffect(() => {
     async function GetImageofTheDay() {
       await fetch(`https://bing.biturl.top/`, { method: "GET" })
